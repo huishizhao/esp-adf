@@ -1,7 +1,7 @@
 /*
  * ESPRESSIF MIT License
  *
- * Copyright (c) 2019 <ESPRESSIF SYSTEMS (SHANGHAI) CO., LTD>
+ * Copyright (c) 2023 <ESPRESSIF SYSTEMS (SHANGHAI) CO., LTD>
  *
  * Permission is hereby granted for use on all ESPRESSIF SYSTEMS products, in which case,
  * it is free of charge, to any person obtaining a copy of this software and associated
@@ -26,10 +26,12 @@
 #define _AUDIO_BOARD_H_
 
 #include "audio_hal.h"
+#include "audio_volume.h"
 #include "board_def.h"
 #include "board_pins_config.h"
-#include "esp_peripherals.h"
 #include "display_service.h"
+#include "esp_peripherals.h"
+#include "periph_lcd.h"
 #include "periph_sdcard.h"
 
 #ifdef __cplusplus
@@ -40,7 +42,8 @@ extern "C" {
  * @brief Audio board handle
  */
 struct audio_board_handle {
-    audio_hal_handle_t audio_hal; /*!< audio hardware abstract layer handle */
+  audio_hal_handle_t audio_hal; /*!< audio hardware abstract layer handle */
+  audio_hal_handle_t adc_hal;   /*!< adc hardware abstract layer handle */
 };
 
 typedef struct audio_board_handle *audio_board_handle_t;
@@ -60,11 +63,52 @@ audio_board_handle_t audio_board_init(void);
 audio_hal_handle_t audio_board_codec_init(void);
 
 /**
+ * @brief Initialize adc
+ *
+ * @return The adc hal handle
+ */
+audio_hal_handle_t audio_board_adc_init(void);
+
+/**
+ * @brief Set volume
+ *
+ * @param board_handle The handle of the audio board
+ * @param volume       The volume value (0-100)
+ *
+ * @return
+ *     - ESP_OK, success
+ *     - Others, fail
+ */
+esp_err_t audio_board_set_volume(audio_board_handle_t board_handle, int volume);
+
+/**
+ * @brief Get volume
+ *
+ * @param board_handle The handle of the audio board
+ * @param volume       Pointer to store the volume value
+ *
+ * @return
+ *     - ESP_OK, success
+ *     - Others, fail
+ */
+esp_err_t audio_board_get_volume(audio_board_handle_t board_handle, int *volume);
+
+/**
+ * @brief Initialize lcd peripheral
+ *
+ * @param set The handle of esp_periph_set_handle_t
+ * @param cb  The `on_color_trans_done` callback in `esp_lcd_panel_io_spi_config_t`
+ *
+ * @return The `esp_lcd_panel_handle_t` handle
+ */
+void *audio_board_lcd_init(esp_periph_set_handle_t set, void *cb);
+
+/**
  * @brief Initialize led peripheral and display service
  *
  * @return The audio display service handle
  */
-display_service_handle_t audio_board_led_init(void);
+display_service_handle_t audio_board_blue_led_init(void);
 
 /**
  * @brief Initialize key peripheral
@@ -104,6 +148,14 @@ audio_board_handle_t audio_board_get_handle(void);
  *          others  fail
  */
 esp_err_t audio_board_deinit(audio_board_handle_t audio_board);
+
+/**
+ * @brief  Get the gpio number for sdcard power control
+ *
+ * @return  -1      error
+ *          Others  SDCard power GPIO
+ */
+int8_t get_sdcard_power_ctrl_gpio(void);
 
 #ifdef __cplusplus
 }
