@@ -54,7 +54,6 @@
 #define CODEC_ADC_SAMPLE_RATE     (48000)
 #define RECORD_HARDWARE_AEC       (true)
 #define BOARD_PA_GAIN             (0) /* Power amplifier gain defined by board (dB) */
-#define PA_ENABLE_GPIO            GPIO_NUM_12
 
 extern audio_hal_func_t AUDIO_CODEC_ES8311_DEFAULT_HANDLE;
 extern audio_hal_func_t AUDIO_CODEC_ES7210_DEFAULT_HANDLE;
