@@ -152,6 +152,7 @@ int8_t get_input_voldown_id(void)
 
 // led pins
 
+/* 
 int8_t get_green_led_gpio(void)
 {
     return GREEN_LED_GPIO;
@@ -160,7 +161,8 @@ int8_t get_green_led_gpio(void)
 int8_t get_blue_led_gpio(void)
 {
     return BLUE_LED_GPIO;
-}
+} 
+*/
 
 int8_t get_es8311_mclk_src(void)
 {
