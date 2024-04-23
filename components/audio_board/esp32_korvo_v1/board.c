@@ -62,51 +62,7 @@ audio_hal_handle_t audio_board_codec_init(void)
     AUDIO_NULL_CHECK(TAG, codec_hal, return NULL);
     return codec_hal;
 }
-/*
-display_service_handle_t audio_board_led_init(void)
-{
-    led_indicator_handle_t led = led_indicator_init((gpio_num_t)get_green_led_gpio());
-    display_service_config_t display = {
-        .based_cfg = {
-            .task_stack = 0,
-            .task_prio  = 0,
-            .task_core  = 0,
-            .task_func  = NULL,
-            .service_start = NULL,
-            .service_stop = NULL,
-            .service_destroy = NULL,
-            .service_ioctl = led_indicator_pattern,
-            .service_name = "DISPLAY_serv",
-            .user_data = NULL,
-        },
-        .instance = led,
-    };
 
-    return display_service_create(&display);
-}
-
-display_service_handle_t audio_board_blue_led_init(void)
-{
-    led_indicator_handle_t led = led_indicator_init((gpio_num_t)get_blue_led_gpio());
-    display_service_config_t display = {
-        .based_cfg = {
-            .task_stack = 0,
-            .task_prio  = 0,
-            .task_core  = 0,
-            .task_func  = NULL,
-            .service_start = NULL,
-            .service_stop = NULL,
-            .service_destroy = NULL,
-            .service_ioctl = led_indicator_pattern,
-            .service_name = "DISPLAY_serv",
-            .user_data = NULL,
-        },
-        .instance = led,
-    };
-
-    return display_service_create(&display);
-}
-*/
 esp_err_t audio_board_key_init(esp_periph_set_handle_t set)
 {
     esp_err_t ret = ESP_OK;
