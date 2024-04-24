@@ -116,7 +116,7 @@ set(COMPONENT_SRCS
 endif()
 
 if (CONFIG_ESP32_KORVO_V1_1_BOARD)
-message(STATUS "Current board name is " CONFIG_ESP32_KORVO_V1_1_BOARD)
+message(STATUS "Current board name is " CONFIG_ESP32_KORVO_V1_BOARD)
 list(APPEND COMPONENT_ADD_INCLUDEDIRS ./esp32_korvo_v1)
 set(COMPONENT_SRCS
 ./esp32_korvo_v1/board.c
