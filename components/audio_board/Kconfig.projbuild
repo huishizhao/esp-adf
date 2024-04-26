@@ -33,7 +33,7 @@ config ESP32_S3_BOX_3_BOARD
     bool "ESP32-S3-BOX-3"
 config ESP32_C3_LYRA_V2_BOARD
     bool "ESP32-C3-Lyra-v2.0"
-config ESP32_KORVO_V1_BOARD
+config CONFIG_ESP32_KORVO_V1_1_BOARD
     bool "ESP32-Korvo-v1"
 config ESP32_C6_DEVKIT_BOARD
     bool "ESP32-C6-DEVKIT"
