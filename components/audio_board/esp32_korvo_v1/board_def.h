@@ -47,7 +47,7 @@
 #define ES7210_MCLK_GPIO          GPIO_NUM_0
 #define HEADPHONE_DETECT          (-1)
 #define PA_ENABLE_GPIO            GPIO_NUM_12
-#define ES8311_MCLK_SOURCE        1   /* 0 From MCLK of esp32   1 From BCLK */
+#define ES8311_MCLK_SOURCE        (1)   /* 0 From MCLK of esp32   1 From BCLK */
 #define CODEC_I2S_PORT            (0)
 #define CODEC_ADC_I2S_PORT        (1)
 #define CODEC_ADC_BITS_PER_SAMPLE  (32) /* 32bit */ /*I2S_BITS_PER_SAMPLE_32BIT*/
