@@ -39,6 +39,8 @@ esp_err_t get_i2c_pins(i2c_port_t port, i2c_config_t *i2c_config)
     if (port == I2C_NUM_0 || port == I2C_NUM_1) {
         i2c_config->sda_io_num = GPIO_NUM_19;
         i2c_config->scl_io_num = GPIO_NUM_32;
+        i2c_config->master.clk_speed = 600000;
+
     } else {
         i2c_config->sda_io_num = -1;
         i2c_config->scl_io_num = -1;
@@ -51,17 +53,17 @@ esp_err_t get_i2c_pins(i2c_port_t port, i2c_config_t *i2c_config)
 esp_err_t get_i2s_pins(int port, board_i2s_pin_t *i2s_config)
 {
     AUDIO_NULL_CHECK(TAG, i2s_config, return ESP_FAIL);
-    if (port == 0) {
+    if (port == 0) { // Codec
         i2s_config->mck_io_num = GPIO_NUM_0;
         i2s_config->bck_io_num = GPIO_NUM_25;
         i2s_config->ws_io_num = GPIO_NUM_22;
         i2s_config->data_out_num = GPIO_NUM_13;
-        i2s_config->data_in_num = -1;
-    } else if (port == 1) {
+        i2s_config->data_in_num = GPIO_NUM_NC;
+    } else if (port == 1) { // ADC
         i2s_config->mck_io_num = GPIO_NUM_0;
         i2s_config->bck_io_num = GPIO_NUM_27;
         i2s_config->ws_io_num = GPIO_NUM_26;
-        i2s_config->data_out_num = -1;
+        i2s_config->data_out_num = GPIO_NUM_NC;
         i2s_config->data_in_num = GPIO_NUM_36;
     } else {
         memset(i2s_config, -1, sizeof(board_i2s_pin_t));
@@ -88,7 +90,15 @@ esp_err_t get_spi_pins(spi_bus_config_t *spi_config, spi_device_interface_config
     ESP_LOGW(TAG, "SPI interface is not supported");
     return ESP_OK;
 }
-
+esp_err_t i2s_mclk_gpio_select(i2s_port_t i2s_num, gpio_num_t gpio_num)
+{
+    if (i2s_num >= I2S_NUM_MAX) {
+        ESP_LOGE(TAG, "Does not support i2s number(%d)", i2s_num);
+        return ESP_ERR_INVALID_ARG;
+    }
+    ESP_LOGI(TAG, "I2S%d, MCLK output by GPIO%d", i2s_num, gpio_num);
+    return ESP_OK;
+}
 // sdcard
 
 int8_t get_sdcard_intr_gpio(void)
