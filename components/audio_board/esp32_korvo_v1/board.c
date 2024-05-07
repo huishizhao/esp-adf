@@ -62,7 +62,21 @@ audio_hal_handle_t audio_board_codec_init(void)
     AUDIO_NULL_CHECK(TAG, codec_hal, return NULL);
     return codec_hal;
 }
+esp_err_t audio_board_set_volume(audio_board_handle_t board_handle, int volume) {
+  if (!board_handle || !board_handle->audio_hal) {
+    ESP_LOGE(TAG, "Invalid board or audio HAL handle");
+    return ESP_FAIL;
+  }
+  return audio_hal_set_volume(board_handle->audio_hal, volume);
+}
 
+esp_err_t audio_board_get_volume(audio_board_handle_t board_handle, int *volume) {
+  if (!board_handle || !board_handle->audio_hal || !volume) {
+    ESP_LOGE(TAG, "Invalid board or audio HAL handle, or null volume pointer");
+    return ESP_FAIL;
+  }
+  return audio_hal_get_volume(board_handle->audio_hal, volume);
+}
 esp_err_t audio_board_key_init(esp_periph_set_handle_t set)
 {
     esp_err_t ret = ESP_OK;
@@ -127,6 +141,7 @@ audio_board_handle_t audio_board_get_handle(void)
 
 esp_err_t audio_board_deinit(audio_board_handle_t audio_board)
 {
+    AUDIO_NULL_CHECK(TAG, audio_board, return ESP_FAIL);
     esp_err_t ret = ESP_OK;
     ret |= audio_hal_deinit(audio_board->audio_hal);
     ret |= audio_hal_deinit(audio_board->adc_hal);
