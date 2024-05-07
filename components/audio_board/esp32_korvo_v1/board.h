@@ -26,6 +26,7 @@
 #define _AUDIO_BOARD_H_
 
 #include "audio_hal.h"
+#include "audio_volume.h"
 #include "board_def.h"
 #include "board_pins_config.h"
 #include "esp_peripherals.h"
@@ -68,9 +69,36 @@ audio_hal_handle_t audio_board_codec_init(void);
 audio_hal_handle_t audio_board_adc_init(void);
 
 /**
- * @brief Initialize led peripheral and display service
+ * @brief Set volume
  *
- * @return The audio display service handle
+ * @param board_handle The handle of the audio board
+ * @param volume       The volume value (0-100)
+ *
+ * @return
+ *     - ESP_OK, success
+ *     - Others, fail
+ */
+esp_err_t audio_board_set_volume(audio_board_handle_t board_handle, int volume);
+
+/**
+ * @brief Get volume
+ *
+ * @param board_handle The handle of the audio board
+ * @param volume       Pointer to store the volume value
+ *
+ * @return
+ *     - ESP_OK, success
+ *     - Others, fail
+ */
+esp_err_t audio_board_get_volume(audio_board_handle_t board_handle, int *volume);
+
+/**
+ * @brief Initialize lcd peripheral
+ *
+ * @param set The handle of esp_periph_set_handle_t
+ * @param cb  The `on_color_trans_done` callback in `esp_lcd_panel_io_spi_config_t`
+ *
+ * @return The `esp_lcd_panel_handle_t` handle
  */
 display_service_handle_t audio_board_led_init(void);
 
