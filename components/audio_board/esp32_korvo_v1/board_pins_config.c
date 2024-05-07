@@ -90,91 +90,42 @@ esp_err_t get_spi_pins(spi_bus_config_t *spi_config, spi_device_interface_config
     ESP_LOGW(TAG, "SPI interface is not supported");
     return ESP_OK;
 }
-esp_err_t i2s_mclk_gpio_select(i2s_port_t i2s_num, gpio_num_t gpio_num)
-{
-    if (i2s_num >= I2S_NUM_MAX) {
-        ESP_LOGE(TAG, "Does not support i2s number(%d)", i2s_num);
-        return ESP_ERR_INVALID_ARG;
-    }
-    ESP_LOGI(TAG, "I2S%d, MCLK output by GPIO%d", i2s_num, gpio_num);
-    return ESP_OK;
-}
+
+esp_err_t i2s_mclk_gpio_select(i2s_port_t i2s_num, gpio_num_t gpio_num) { return ESP_OK; }
+
 // sdcard
 
-int8_t get_sdcard_intr_gpio(void)
-{
-    return SDCARD_INTR_GPIO;
-}
+int8_t get_sdcard_intr_gpio(void) { return SDCARD_INTR_GPIO; }
 
-int8_t get_sdcard_open_file_num_max(void)
-{
-    return SDCARD_OPEN_FILE_NUM_MAX;
-}
+int8_t get_sdcard_open_file_num_max(void) { return SDCARD_OPEN_FILE_NUM_MAX; }
 
-int8_t get_sdcard_power_ctrl_gpio(void)
-{
-    return SDCARD_PWR_CTRL;
-}
+int8_t get_sdcard_power_ctrl_gpio(void) { return SDCARD_PWR_CTRL; }
 
 // input-output pins
 
-int8_t get_headphone_detect_gpio(void)
-{
-    return HEADPHONE_DETECT;
-}
+int8_t get_headphone_detect_gpio(void) { return HEADPHONE_DETECT; }
 
-int8_t get_pa_enable_gpio(void)
-{
-    return PA_ENABLE_GPIO;
-}
+int8_t get_pa_enable_gpio(void) { return PA_ENABLE_GPIO; }
 
 // adc button id
 
-int8_t get_input_rec_id(void)
-{
-    return BUTTON_REC_ID;
-}
+int8_t get_input_rec_id(void) { return BUTTON_REC_ID; }
 
-int8_t get_input_mode_id(void)
-{
-    return BUTTON_MODE_ID;
-}
+int8_t get_input_mode_id(void) { return BUTTON_MODE_ID; }
 
-int8_t get_input_set_id(void)
-{
-    return BUTTON_SET_ID;
-}
+int8_t get_input_set_id(void) { return BUTTON_SET_ID; }
 
-int8_t get_input_play_id(void)
-{
-    return BUTTON_PLAY_ID;
-}
+int8_t get_input_play_id(void) { return BUTTON_PLAY_ID; }
 
-int8_t get_input_volup_id(void)
-{
-    return BUTTON_VOLUP_ID;
-}
+int8_t get_input_volup_id(void) { return BUTTON_VOLUP_ID; }
 
-int8_t get_input_voldown_id(void)
-{
-    return BUTTON_VOLDOWN_ID;
-}
+int8_t get_input_voldown_id(void) { return BUTTON_VOLDOWN_ID; }
+
 
 // led pins
 
-/* 
-int8_t get_green_led_gpio(void)
-{
-    return GREEN_LED_GPIO;
-}
+int8_t get_green_led_gpio(void) { return -1; }
 
-int8_t get_blue_led_gpio(void)
-{
-    return BLUE_LED_GPIO;
-} 
-*/
+int8_t get_blue_led_gpio(void) { return -1; }
 
-int8_t get_es8311_mclk_src(void)
-{
-    return ES8311_MCLK_SOURCE;
-}
+int8_t get_es8311_mclk_src(void) { return -1; }
