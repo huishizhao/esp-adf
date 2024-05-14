@@ -50,7 +50,7 @@
 #define ES8311_MCLK_SOURCE        (1)   /* 0 From MCLK of esp32   1 From BCLK */
 #define CODEC_I2S_PORT            (0)
 #define CODEC_ADC_I2S_PORT        (1)
-#define CODEC_ADC_BITS_PER_SAMPLE  (32) /* 32bit */ /*I2S_BITS_PER_SAMPLE_32BIT*/
+#define CODEC_ADC_BITS_PER_SAMPLE  I2S_BITS_PER_SAMPLE_32BIT /* 32bit */ /*(32)*/
 //#define CODEC_ADC_BITS_PER_SAMPLE (16) /* 16bit */
 #define CODEC_ADC_SAMPLE_RATE     (16000)
 #define RECORD_HARDWARE_AEC       (true)
